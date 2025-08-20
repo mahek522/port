@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Based Stress Prediction System - Mahek Sultana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            /* Minimal Pastel Theme */
+            --primary-color: #1D3557; /* Dark Navy - Text */
+            --secondary-color: #FFB4A2; /* Peach - Accent */
+            --accent-color: #B7E4C7; /* Mint Green - Secondary Accent */
+            --dark-bg: #A8DADC; /* Pastel Blue - Background */
+            --darker-bg: #9BC5C7; /* Slightly darker pastel blue */
+            --light-bg: #E8F4F8; /* Very light pastel blue */
+            --text-primary: #1D3557; /* Dark Navy - Text */
+            --text-secondary: #2A4A6B; /* Slightly lighter navy */
+            --white: #ffffff;
+            --shadow: 0 15px 35px rgba(29, 53, 87, 0.15);
+            --gradient: linear-gradient(135deg, #1D3557 0%, #2A4A6B 100%);
+            --gradient-alt: linear-gradient(135deg, #FFB4A2 0%, #B7E4C7 100%);
+            --gradient-dark: linear-gradient(135deg, #9BC5C7 0%, #A8DADC 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: var(--darker-bg);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .project-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .project-section {
+            margin-bottom: 40px;
+        }
+
+        .project-section h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .project-section h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+        }
+
+        .project-section p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-tag {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .publication-info {
+            background: var(--light-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .publication-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pub-link {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pub-link:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .highlight-box {
+            background: var(--accent-color);
+            border-left: 5px solid var(--secondary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer .heart {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .project-content {
+                padding: 25px;
+            }
+            
+            .publication-links {
+                flex-direction: column;
+            }
+            
+            .back-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                display: inline-block;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="portfolio.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <h1>AI-Based Stress Prediction System</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="project-content">
+            <div class="project-section">
+                <h2>Project Overview</h2>
+                <p>This project is about creating a smart system that can detect when a person is feeling stressed by using small sensors that measure things like heart rate and skin moisture. These sensors send the information to a tiny computer, which then uses artificial intelligence (AI) to figure out how stressed the person is—whether they are relaxed, a little stressed, or very stressed.</p>
+                
+                <div class="highlight-box">
+                    <h4>🎯 Key Innovation</h4>
+                    <p>This project was published in the International Journal of Innovative Research in Technology (IJIRT), demonstrating its academic significance and technical excellence in the field of IoT-based health monitoring systems.</p>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Real-World Impact</h2>
+                <p>A real-life example that shows why this project is important is V.G. Siddhartha, the founder of Café Coffee Day. Even though he was a successful businessman, he was going through a lot of stress and pressure, especially related to money and business problems. Sadly, he didn't get the help he needed in time, and this led to a very tragic outcome.</p>
+                
+                <p>If a system like the AI-Based Stress Prediction System had been there, it could have warned him early and suggested ways to reduce stress. This shows how important it is to keep an eye on stress and take care of mental health, especially for people dealing with a lot of responsibilities.</p>
+            </div>
+
+            <div class="project-section">
+                <h2>Technical Implementation</h2>
+                <h3>Hardware Components</h3>
+                <ul>
+                    <li><strong>GSR Sensor:</strong> Measures stress levels by detecting changes in skin moisture caused by sweat glands and emotions using two electrodes placed on the skin</li>
+                    <li><strong>Heart Rate Sensor:</strong> Attached to a finger to measure pulse rate</li>
+                    <li><strong>ESP32 Microcontroller:</strong> Processes sensor data and handles cloud communication</li>
+                    <li><strong>DHT11 Sensor:</strong> Monitors environmental temperature and humidity for context</li>
+                </ul>
+
+                <h3>Software Architecture</h3>
+                <ul>
+                    <li><strong>Arduino C++:</strong> Main programming language for ESP32</li>
+                    <li><strong>ThingSpeak API:</strong> Cloud platform for data storage and visualization</li>
+                    <li><strong>ANFIS Algorithm:</strong> Adaptive Neuro-Fuzzy Inference System for stress classification</li>
+                    <li><strong>Web Dashboard:</strong> Real-time monitoring interface built with HTML/CSS/JavaScript</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">ESP32</span>
+                    <span class="tech-tag">GSR Sensor</span>
+                    <span class="tech-tag">Heart Rate Sensor</span>
+                    <span class="tech-tag">DHT11</span>
+                    <span class="tech-tag">Arduino C++</span>
+                    <span class="tech-tag">ANFIS</span>
+                    <span class="tech-tag">ThingSpeak</span>
+                    <span class="tech-tag">HTML/CSS/JS</span>
+                    <span class="tech-tag">IoT</span>
+                    <span class="tech-tag">Machine Learning</span>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Publication Details</h2>
+                <div class="publication-info">
+                    <h3>📚 Published in IJIRT (International Journal of Innovative Research in Technology)</h3>
+                    <p><strong>Paper Title:</strong> "Stress Monitoring System Using IoT"</p>
+                    <p><strong>Authors:</strong> Dr Soumya M Anakal, Divya Davanagere, Nishita N Madamshetty, <strong>Mahek Sultana Baghban</strong></p>
+                    <p><strong>Institution:</strong> PDA College of Engineering</p>
+                    <p><strong>Key Contributions:</strong></p>
+                    <ul>
+                        <li>Novel integration of ANFIS into IoT-based stress monitoring</li>
+                        <li>Achieved ~90% classification accuracy with ~88% sensitivity and ~92% specificity</li>
+                        <li>Edge-based processing for real-time stress detection</li>
+                        <li>Environmental context integration with physiological signals</li>
+                        <li>Local web interface for immediate feedback</li>
+                    </ul>
+                    
+                    <div class="publication-links">
+                        <a href="https://ijirt.org/publishedpaper/IJIRT180619_PAPER.pdf" class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> View Published Paper
+                        </a>
+                        <a href="https://drive.google.com/file/d/1RYue8pNd-2EIDtFGCVGpK8mT3mX_Ngs3/view?usp=drivesdk" class="pub-link" target="_blank">
+                            <i class="fas fa-certificate"></i> View Publication Certificate
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Results & Validation</h2>
+                <p>The system was tested and it worked well. It was able to read heart rate and GSR (skin response) from the sensors. The data was shown live on a web dashboard. When someone was stressed, the system gave an alert. The AI model could tell if the person was calm or stressed.</p>
+                
+                <div class="highlight-box">
+                    <h4>📊 Performance Metrics</h4>
+                    <p><strong>Classification Accuracy:</strong> ~90%</p>
+                    <p><strong>Sensitivity:</strong> ~88%</p>
+                    <p><strong>Specificity:</strong> ~92%</p>
+                    <p><strong>Response Time:</strong> &lt;1 second</p>
+                </div>
+
+                <p>Overall, the project gave good results and proved that stress can be detected using sensors and AI in real time. The system successfully demonstrated the viability of edge-based stress monitoring with competitive performance compared to cloud-based alternatives.</p>
+            </div>
+
+            <div class="project-section">
+                <h2>Future Enhancements</h2>
+                <ul>
+                    <li>Multi-level stress classification (low, moderate, high)</li>
+                    <li>Integration of additional biosensors (ECG, accelerometer)</li>
+                    <li>Online personalization based on user baseline metrics</li>
+                    <li>Secure cloud integration for long-term trend analysis</li>
+                    <li>Extensive validation with larger participant groups</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2024 Mahek Sultana. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 1.1rem; color: var(--primary-color);">
+                Made with <span style="color: #ff0000; font-size: 1.2rem;">❤</span> by Mahek Sultana
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

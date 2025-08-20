@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Voice Recognition System - Project Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            /* Minimal Pastel Theme */
+            --primary-color: #1D3557; /* Dark Navy - Text */
+            --secondary-color: #FFB4A2; /* Peach - Accent */
+            --accent-color: #B7E4C7; /* Mint Green - Secondary Accent */
+            --dark-bg: #A8DADC; /* Pastel Blue - Background */
+            --darker-bg: #9BC5C7; /* Slightly darker pastel blue */
+            --light-bg: #E8F4F8; /* Very light pastel blue */
+            --text-primary: #1D3557; /* Dark Navy - Text */
+            --text-secondary: #2A4A6B; /* Slightly lighter navy */
+            --white: #ffffff;
+            --shadow: 0 15px 35px rgba(29, 53, 87, 0.15);
+            --gradient: linear-gradient(135deg, #1D3557 0%, #2A4A6B 100%);
+            --gradient-alt: linear-gradient(135deg, #FFB4A2 0%, #B7E4C7 100%);
+            --gradient-dark: linear-gradient(135deg, #9BC5C7 0%, #A8DADC 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: var(--darker-bg);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 60px 0;
+        }
+
+        .project-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .project-section {
+            margin-bottom: 40px;
+        }
+
+        .project-section h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .project-section h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+        }
+
+        .project-section p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .highlight-box {
+            background: var(--accent-color);
+            border-left: 5px solid var(--secondary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tech-card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .tech-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .tech-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-card li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tech-card li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .result-card {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .result-card i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .result-card h4 {
+            margin-bottom: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-tag {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 2px solid var(--secondary-color);
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer .heart {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 30px 20px;
+            }
+            
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="portfolio.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
+
+    <div class="header">
+        <div class="container">
+            <h1>Bird Voice Recognition System</h1>
+            <p>AI-powered bird species identification from audio recordings</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <!-- Project Overview -->
+            <div class="project-content">
+                <h2>Project Overview</h2>
+                <p>Developed a Bird Voice Recognition System in Python capable of identifying bird species from audio recordings using signal processing and machine learning techniques. This innovative system can analyze bird calls and songs to accurately classify different species, making it valuable for ornithologists, researchers, and nature enthusiasts.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Key Innovation:</strong> The system implements audio preprocessing, feature extraction (MFCCs), and model training for accurate classification. It provides an end-to-end script for real-time inference, enabling users to identify bird species from audio recordings with high accuracy.</p>
+                </div>
+            </div>
+
+            <!-- Technical Implementation -->
+            <div class="project-content">
+                <h2>Technical Implementation</h2>
+                
+                <h3>Audio Processing Pipeline</h3>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>Audio Preprocessing</h4>
+                        <ul>
+                            <li>Audio file loading and format conversion</li>
+                            <li>Noise reduction and filtering</li>
+                            <li>Sample rate normalization</li>
+                            <li>Audio segmentation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Feature Extraction</h4>
+                        <ul>
+                            <li>MFCC (Mel-frequency cepstral coefficients)</li>
+                            <li>Spectral features analysis</li>
+                            <li>Time-domain features</li>
+                            <li>Frequency domain analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Machine Learning Model</h4>
+                        <ul>
+                            <li>Convolutional Neural Network (CNN)</li>
+                            <li>Deep learning architecture</li>
+                            <li>Model training and validation</li>
+                            <li>Hyperparameter optimization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>System Architecture</h3>
+                <p><strong>Data Flow:</strong> Audio input → Preprocessing → Feature extraction → Model inference → Species classification → Results output</p>
+                
+                <p><strong>Real-time Processing:</strong> The system can process audio streams in real-time, making it suitable for field research and live bird monitoring applications.</p>
+            </div>
+
+            <!-- Key Features -->
+            <div class="project-content">
+                <h2>Key Features</h2>
+                
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>Species Recognition</h4>
+                        <ul>
+                            <li>Support for 50+ bird species</li>
+                            <li>High accuracy classification</li>
+                            <li>Confidence score reporting</li>
+                            <li>Multiple species detection</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Real-time Processing</h4>
+                        <ul>
+                            <li>Live audio stream analysis</li>
+                            <li>Instant species identification</li>
+                            <li>Low latency processing</li>
+                            <li>Continuous monitoring</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>User Interface</h4>
+                        <ul>
+                            <li>Command-line interface</li>
+                            <li>User-friendly operation</li>
+                            <li>Detailed classification reports</li>
+                            <li>Cross-platform compatibility</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Data Management</h4>
+                        <ul>
+                            <li>Audio file organization</li>
+                            <li>Classification history</li>
+                            <li>Results export functionality</li>
+                            <li>Database integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Details -->
+            <div class="project-content">
+                <h2>Implementation Details</h2>
+                
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>Signal Processing</h4>
+                        <ul>
+                            <li>Librosa library for audio analysis</li>
+                            <li>MFCC feature extraction</li>
+                            <li>Audio preprocessing pipeline</li>
+                            <li>Signal enhancement techniques</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Machine Learning</h4>
+                        <ul>
+                            <li>TensorFlow/Keras framework</li>
+                            <li>CNN model architecture</li>
+                            <li>Model training and validation</li>
+                            <li>Transfer learning techniques</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Data Processing</h4>
+                        <ul>
+                            <li>NumPy for numerical operations</li>
+                            <li>Scikit-learn for preprocessing</li>
+                            <li>Pandas for data manipulation</li>
+                            <li>Matplotlib for visualization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results & Performance -->
+            <div class="project-content">
+                <h2>Results & Performance</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <i class="fas fa-microphone"></i>
+                        <h4>Audio Processing</h4>
+                        <p>Successfully processed various audio formats with high fidelity</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <i class="fas fa-brain"></i>
+                        <h4>Model Accuracy</h4>
+                        <p>Achieved high classification accuracy for bird species identification</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Real-time Performance</h4>
+                        <p>Fast inference times for live audio processing</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Feature Extraction</h4>
+                        <p>Effective MFCC feature extraction for audio analysis</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>Performance Metrics</h3>
+                    <p><strong>Accuracy:</strong> The system achieved high accuracy in bird species classification, demonstrating the effectiveness of the MFCC feature extraction and CNN model architecture.</p>
+                    <p><strong>Processing Speed:</strong> Real-time audio processing capabilities enable immediate species identification, making it suitable for field research applications.</p>
+                </div>
+            </div>
+
+            <!-- Technologies Used -->
+            <div class="project-content">
+                <h2>Technologies & Tools Used</h2>
+                
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>Programming</h4>
+                        <ul>
+                            <li>Python 3.8+</li>
+                            <li>Object-oriented programming</li>
+                            <li>Modular code architecture</li>
+                            <li>Error handling</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Machine Learning</h4>
+                        <ul>
+                            <li>TensorFlow/Keras</li>
+                            <li>Convolutional Neural Networks</li>
+                            <li>Scikit-learn</li>
+                            <li>Model training & validation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Audio Processing</h4>
+                        <ul>
+                            <li>Librosa library</li>
+                            <li>MFCC feature extraction</li>
+                            <li>Signal processing</li>
+                            <li>Audio preprocessing</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <h4>Data Science</h4>
+                        <ul>
+                            <li>NumPy</li>
+                            <li>Pandas</li>
+                            <li>Matplotlib</li>
+                            <li>Data visualization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications -->
+            <div class="project-content">
+                <h2>Applications & Impact</h2>
+                <div class="highlight-box">
+                    <h3>Research Applications</h3>
+                    <p>This system has significant applications in ornithology research, biodiversity studies, and environmental monitoring. It can help researchers identify bird species in various habitats, track migration patterns, and monitor ecosystem health through bird population analysis.</p>
+                    <p><strong>Educational Value:</strong> The project demonstrates advanced signal processing and machine learning techniques, making it valuable for educational purposes in computer science and bioacoustics.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2024 Mahek Sultana. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 1.1rem; color: var(--primary-color);">
+                Made with <span style="color: #ff0000; font-size: 1.2rem;">❤</span> by Mahek Sultana
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
