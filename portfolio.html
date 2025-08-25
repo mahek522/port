@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahek Sultana - Full Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Minimal Pastel Theme */
+            --primary-color: #1D3557; /* Dark Navy - Text */
+            --secondary-color: #FFB4A2; /* Peach - Accent */
+            --accent-color: #B7E4C7; /* Mint Green - Secondary Accent */
+            --dark-bg: #A8DADC; /* Pastel Blue - Background */
+            --darker-bg: #9BC5C7; /* Slightly darker pastel blue */
+            --light-bg: #E8F4F8; /* Very light pastel blue */
+            --text-primary: #1D3557; /* Dark Navy - Text */
+            --text-secondary: #2A4A6B; /* Slightly lighter navy */
+            --white: #ffffff;
+            --shadow: 0 15px 35px rgba(29, 53, 87, 0.15);
+            --gradient: linear-gradient(135deg, #1D3557 0%, #2A4A6B 100%);
+            --gradient-alt: linear-gradient(135deg, #FFB4A2 0%, #B7E4C7 100%);
+            --gradient-dark: linear-gradient(135deg, #9BC5C7 0%, #A8DADC 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--dark-bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+            background: var(--dark-bg);
+            position: relative;
+            z-index: 1;
+            color: var(--text-primary);
+        }
+
+        /* Ensure projects section is visible */
+        #projects {
+            background: var(--darker-bg);
+            min-height: 100vh;
+            display: block;
+        }
+
+        #projects .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+        }
+
+        .card h3 {
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+        }
+
+        /* Ensure all section titles are visible */
+        .section h2 {
+            color: var(--primary-color) !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Simple project cards */
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--light-bg);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .project-card h3 {
+            color: var(--text-primary);
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Professional button styles */
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--white);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Ensure filter buttons are visible */
+        .btn[onclick^="filterProjects"] {
+            color: var(--text-primary);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn[onclick^="filterProjects"]:hover {
+            background: var(--gradient);
+            color: var(--white);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(168, 218, 220, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(155, 197, 199, 0.98);
+            box-shadow: 0 5px 20px rgba(29, 53, 87, 0.15);
+        }
+
+        /* Ensure navigation links are always visible */
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            background: transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            background: transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--dark-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Enhanced animations and effects */
+        .card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section.animate-in .card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section.animate-in .card:nth-child(1) { transition-delay: 0.1s; }
+        .section.animate-in .card:nth-child(2) { transition-delay: 0.2s; }
+        .section.animate-in .card:nth-child(3) { transition-delay: 0.3s; }
+        .section.animate-in .card:nth-child(4) { transition-delay: 0.4s; }
+        .section.animate-in .card:nth-child(5) { transition-delay: 0.5s; }
+        .section.animate-in .card:nth-child(6) { transition-delay: 0.6s; }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .project-card img {
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.8);
+        }
+
+        /* Enhanced expand button effects */
+        .expand-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expand-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .expand-btn:hover::before {
+            left: 100%;
+        }
+
+        .expand-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3) !important;
+        }
+
+        /* Project details animation */
+        .project-details {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced project card interactions */
+        .project-card .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,107,107,0.9) 0%, rgba(78,205,196,0.9) 100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        /* Progress bar animation */
+        .progress-bar {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Enhanced button hover effects */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Enhanced social media hover effects */
+        .social-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+
+
+        /* Enhanced skill tags hover effect */
+        .skill-tag {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+
+
+        /* Enhanced header effects */
+        .header {
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Enhanced hero section */
+        .hero::before {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/><circle cx="25" cy="25" r="0.5" fill="white" opacity="0.05"/><circle cx="75" cy="75" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">MS</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 60px; flex-wrap: wrap;">
+                    <!-- Profile Picture -->
+                    <div style="text-align: center;">
+                        <div style="width: 200px; height: 200px; border-radius: 50%; background: var(--gradient); padding: 5px; margin: 0 auto 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);">
+                            <div style="width: 100%; height: 100%; border-radius: 50%; background: var(--dark-bg); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                <img id="profile-picture" src="https://drive.google.com/uc?export=view&id=1NtLuLPx3_VJv6IH1Pvgjhz73X-_WGFh4" referrerpolicy="no-referrer" crossorigin="anonymous"
+                                     alt="Mahek Sultana" 
+                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hero Text -->
+                    <div style="text-align: left; max-width: 500px;">
+                        <h1 class="floating">Mahek Sultana</h1>
+                        <div class="typing-container" style="margin-bottom: 20px;">
+                            <span id="typing-text" style="font-size: 1.5rem; font-weight: 600; color: var(--primary-color);"></span>
+                            <span class="typing-cursor" style="font-size: 1.5rem; color: var(--primary-color);">|</span>
+                        </div>
+                        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 30px;">Passionate about creating innovative digital solutions and bringing ideas to life through code</p>
+                        <div class="hero-buttons" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a href="#projects" class="btn-primary">
+                                <i class="fas fa-code"></i>
+                                View My Work
+                            </a>
+                            <a href="https://drive.google.com/uc?export=download&id=1e-D7t99irJ2PaQ8zrRC8rAsxNCAcCSF4" class="btn-secondary" download="Mahek_Sultana_Resume.pdf">
+                                <i class="fas fa-download"></i>
+                                Download Resume
+                            </a>
+                            <a href="#contact" class="btn-secondary">
+                                <i class="fas fa-envelope"></i>
+                                Get In Touch
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; color: var(--primary-color);">About Me</h2>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Passionate Full Stack Developer with expertise in modern web technologies</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px;">
+                <div class="card" style="text-align: center;">
+                    <i class="fas fa-user" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Who I Am</h3>
+                    <p style="color: var(--text-secondary);">A dedicated Full Stack Developer passionate about creating innovative digital solutions and bringing ideas to life through code.</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <i class="fas fa-code" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px;">My Journey</h3>
+                    <p style="color: var(--text-secondary);">From frontend to backend, I've mastered the complete development stack to deliver seamless user experiences.</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <i class="fas fa-rocket" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px;">What I Do</h3>
+                    <p style="color: var(--text-secondary);">Building scalable applications with modern technologies, focusing on performance, security, and user experience.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills" style="background: var(--darker-bg);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; color: var(--primary-color);">Skills & Expertise</h2>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Mastering the full stack with modern technologies and best practices</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                <!-- Programming Languages -->
+                <div class="card">
+                    <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                        <i class="fas fa-code" style="font-size: 2rem; color: var(--primary-color); margin-right: 15px;"></i>
+                        <h3 style="font-size: 1.5rem; font-weight: 600;">Programming Languages</h3>
+                    </div>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fab fa-java" style="font-size: 1.5rem; color: var(--secondary-color);"></i>
+                            <span style="font-weight: 500;">Java</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fab fa-python" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                            <span style="font-weight: 500;">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend Skills -->
+                <div class="card">
+                    <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                        <i class="fas fa-palette" style="font-size: 2rem; color: var(--secondary-color); margin-right: 15px;"></i>
+                        <h3 style="font-size: 1.5rem; font-weight: 600;">Frontend Development</h3>
+                    </div>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fab fa-html5" style="font-size: 1.5rem; color: #e34f26;"></i>
+                            <span style="font-weight: 500;">HTML</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fab fa-css3-alt" style="font-size: 1.5rem; color: #1572b6;"></i>
+                            <span style="font-weight: 500;">CSS</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fab fa-js-square" style="font-size: 1.5rem; color: #f7df1e;"></i>
+                            <span style="font-weight: 500;">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend & Database -->
+                <div class="card">
+                    <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                        <i class="fas fa-server" style="font-size: 2rem; color: var(--accent-color); margin-right: 15px;"></i>
+                        <h3 style="font-size: 1.5rem; font-weight: 600;">Backend & Database</h3>
+                    </div>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fab fa-java" style="font-size: 1.5rem; color: var(--secondary-color);"></i>
+                            <span style="font-weight: 500;">Java (Backend)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-database" style="font-size: 1.5rem; color: #4479a1;"></i>
+                            <span style="font-weight: 500;">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Skills -->
+                <div class="card">
+                    <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                        <i class="fas fa-brain" style="font-size: 2rem; color: var(--primary-color); margin-right: 15px;"></i>
+                        <h3 style="font-size: 1.5rem; font-weight: 600;">Other Skills</h3>
+                    </div>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-robot" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                            <span style="font-weight: 500;">Machine Learning</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-cube" style="font-size: 1.5rem; color: var(--secondary-color);"></i>
+                            <span style="font-weight: 500;">OOPS</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-file-word" style="font-size: 1.5rem; color: #2b579a;"></i>
+                            <span style="font-weight: 500;">Microsoft Suite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; color: var(--primary-color);">My Projects</h2>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Showcasing innovative solutions and creative problem-solving</p>
+            </div>
+
+            <!-- Project Filters -->
+            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap;">
+                <button class="btn" onclick="filterProjects('all')" style="background: var(--gradient);">All Projects</button>
+                <button class="btn" onclick="filterProjects('ai')" style="background: transparent; color: var(--text-primary); border: 2px solid var(--primary-color);">AI/ML</button>
+                <button class="btn" onclick="filterProjects('iot')" style="background: transparent; color: var(--text-primary); border: 2px solid var(--primary-color);">IoT</button>
+                <button class="btn" onclick="filterProjects('web')" style="background: transparent; color: var(--text-primary); border: 2px solid var(--primary-color);">Web Apps</button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <!-- Bird Voice Recognition System -->
+                <div class="card project-card" data-category="ai" style="position: relative; overflow: hidden;">
+                    <div style="position: relative; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <i class="fas fa-feather-alt" style="font-size: 4rem; color: var(--white); z-index: 2;"></i>
+                        <div style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px;">
+                            <button onclick="openProjectDetails('bird-project')" class="expand-btn" style="background: rgba(255,255,255,0.2); color: var(--white); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: none; cursor: pointer;">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                        </div>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); padding: 20px;">
+                            <h4 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">AI/ML Project</h4>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 15px;">Bird Voice Recognition System</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Developed a Bird Voice Recognition System in Python capable of identifying bird species from audio recordings using signal processing and machine learning techniques.</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Python</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Signal Processing</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Machine Learning</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Audio Analysis</span>
+                    </div>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; padding-left: 20px;">
+                        <li>Implemented audio preprocessing and feature extraction (MFCCs)</li>
+                        <li>Model training for accurate classification</li>
+                        <li>End-to-end script for real-time inference</li>
+                        <li>Signal processing and machine learning techniques</li>
+                    </ul>
+                </div>
+
+                <!-- AI Based Stress Prediction System -->
+                <div class="card project-card" data-category="ai" style="position: relative; overflow: hidden;">
+                    <div style="position: relative; height: 200px; background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <i class="fas fa-brain" style="font-size: 4rem; color: var(--white); z-index: 2;"></i>
+                        <div style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px;">
+                            <button onclick="openProjectDetails('stress-project')" class="expand-btn" style="background: rgba(255,255,255,0.2); color: var(--white); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: none; cursor: pointer;">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                        </div>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); padding: 20px;">
+                            <h4 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">IoT & AI Project</h4>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 15px;">AI Based Stress Prediction System</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Developed an AI-Based Stress Prediction System using GSR and heart rate sensors to capture real-time physiological data.</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">ESP32</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">GSR Sensors</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">ThingSpeak</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Web Dashboard</span>
+                    </div>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; padding-left: 20px;">
+                        <li>Real-time physiological data processing and analysis</li>
+                        <li>ESP32 microcontroller and ThingSpeak cloud integration</li>
+                        <li>Web dashboard for live monitoring</li>
+                        <li>Personalized stress relief recommendations</li>
+                    </ul>
+                </div>
+
+                <!-- Weather Forecasting App -->
+                <div class="card project-card" data-category="web" style="position: relative; overflow: hidden;">
+                    <div style="position: relative; height: 200px; background: linear-gradient(135deg, #45b7d1 0%, #96ceb4 100%); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <i class="fas fa-cloud-sun" style="font-size: 4rem; color: var(--white); z-index: 2;"></i>
+                        <div style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px;">
+                            <button onclick="openProjectDetails('weather-project')" class="expand-btn" style="background: rgba(255,255,255,0.2); color: var(--white); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: none; cursor: pointer;">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                        </div>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); padding: 20px;">
+                            <h4 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">Web Development</h4>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 15px;">Weather Forecasting App</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Built a Weather Forecasting App that retrieves and displays real-time weather data using APIs.</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">HTML</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">CSS</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">JavaScript</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Weather API</span>
+                    </div>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; padding-left: 20px;">
+                        <li>Location-based forecasts with temperature and humidity</li>
+                        <li>Intuitive user interface design</li>
+                        <li>Accurate and timely updates through API integration</li>
+                        <li>Real-time weather data parsing and display</li>
+                    </ul>
+                </div>
+
+                <!-- Simple Clap Control Home Automation -->
+                <div class="card project-card" data-category="iot" style="position: relative; overflow: hidden;">
+                    <div style="position: relative; height: 200px; background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <i class="fas fa-home" style="font-size: 4rem; color: var(--white); z-index: 2;"></i>
+                        <div style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px;">
+                            <button onclick="openProjectDetails('home-project')" class="expand-btn" style="background: rgba(255,255,255,0.2); color: var(--white); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: none; cursor: pointer;">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                        </div>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); padding: 20px;">
+                            <h4 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">IoT Project</h4>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 15px;">Simple Clap Control Home Automation</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Developed a Simple Clap-Control Home Automation system using sound detection circuitry to recognize specific clap patterns.</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Sound Detection</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Relay Control</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">IoT</span>
+                        <span style="background: var(--light-bg); color: var(--text-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--primary-color);">Home Automation</span>
+                    </div>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; padding-left: 20px;">
+                        <li>Relay-based switching mechanism for controlling appliances</li>
+                        <li>Reliable and hands-free operation</li>
+                        <li>Cost-effective and efficient solution</li>
+                        <li>Convenient home automation implementation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#contact" class="btn-primary" style="font-size: 1.1rem; padding: 15px 40px;">
+                    <i class="fas fa-handshake"></i>
+                    Let's Work Together
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact" style="background: var(--darker-bg);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; color: var(--primary-color);">Get In Touch</h2>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Ready to start a project or just want to chat? Let's connect!</p>
+            </div>
+
+                         <div style="display: flex; justify-content: center;">
+                <!-- Contact Info -->
+                <div>
+                    <h3 style="font-size: 1.8rem; font-weight: 600; margin-bottom: 30px;">Contact Information</h3>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 25px;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 50px; height: 50px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-envelope" style="color: var(--white); font-size: 1.2rem;"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 5px;">Email</h4>
+                                <p style="color: var(--text-secondary);">maheksultana152@gmail.com</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- Social Links -->
+                    <div style="margin-top: 40px;">
+                        <h4 style="font-weight: 600; margin-bottom: 20px;">Connect With Me</h4>
+                        <div style="display: flex; gap: 15px;">
+                            <a href="https://github.com/mahek522" target="_blank" class="social-link" style="width: 45px; height: 45px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/mahek-sultana-a51008280?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-link" style="width: 45px; height: 45px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--darker-bg); color: var(--text-primary); text-align: center; padding: 30px 0;">
+        <div class="container">
+            <p>&copy; 2024 Mahek Sultana. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 1.1rem; color: var(--primary-color);">
+                Made with <span style="color: #ff0000; font-size: 1.2rem;">❤</span> by Mahek Sultana
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Project filtering functionality
+        function filterProjects(category) {
+            const projects = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('[onclick^="filterProjects"]');
+            
+            // Update button styles
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(category)) {
+                    btn.style.background = 'var(--gradient)';
+                    btn.style.color = 'var(--white)';
+                    btn.style.border = 'none';
+                } else {
+                    btn.style.background = 'transparent';
+                    btn.style.color = 'var(--text-primary)';
+                    btn.style.border = '2px solid var(--primary-color)';
+                }
+            });
+
+            // Filter projects
+            projects.forEach(project => {
+                if (category === 'all' || project.getAttribute('data-category') === category) {
+                    project.style.display = 'block';
+                    project.style.animation = 'fadeInUp 0.6s ease';
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        }
+
+
+
+
+
+        // Social media hover effects
+        document.querySelectorAll('a[href="#"]').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.1)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add CSS animations for smooth transitions
+        const style = document.createElement('style');
+        style.textContent = `
+            .card {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s ease;
+            }
+            
+            .section.animate-in .card {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .section.animate-in .card:nth-child(1) { transition-delay: 0.1s; }
+            .section.animate-in .card:nth-child(2) { transition-delay: 0.2s; }
+            .section.animate-in .card:nth-child(3) { transition-delay: 0.3s; }
+            .section.animate-in .card:nth-child(4) { transition-delay: 0.4s; }
+            .section.animate-in .card:nth-child(5) { transition-delay: 0.5s; }
+            .section.animate-in .card:nth-child(6) { transition-delay: 0.6s; }
+            
+            /* Ensure smooth scrolling */
+            html {
+                scroll-behavior: smooth;
+            }
+            
+            /* Fix for project section visibility */
+            #projects {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Professional animations */
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+
+            .floating {
+                animation: float 3s ease-in-out infinite;
+            }
+
+            /* Enhanced button hover effects */
+            .btn-primary:hover, .btn-secondary:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+            }
+
+            /* Professional card shadows */
+            .card {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+
+            .card:hover {
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+                transform: translateY(-5px);
+            }
+
+            /* Typing animation styles */
+            .typing-container {
+                min-height: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .typing-cursor {
+                animation: blink 1s infinite;
+            }
+
+            @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+
+            /* Professional gradient text */
+            .gradient-text {
+                background: var(--gradient);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            /* Enhanced social links */
+            .social-link {
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+
+            .social-link:hover {
+                transform: translateY(-5px) scale(1.1);
+                box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Optimized intersection observer for better performance
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Initialize first section as animated
+        document.querySelector('.section').classList.add('animate-in');
+
+        // Initialize Typing Animation
+        new Typed('#typing-text', {
+            strings: [
+                'Full Stack Developer',
+                'AI/ML Enthusiast',
+                'Problem Solver',
+                'Creative Coder'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true,
+            showCursor: false
+        });
+
+        // Add typing cursor animation
+        const cursor = document.querySelector('.typing-cursor');
+        setInterval(() => {
+            cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+        }, 500);
+
+        // Project details page navigation
+        function openProjectDetails(projectId) {
+            // Create project detail pages based on project ID
+            const projectPages = {
+                'bird-project': 'bird-project-details.html',
+                'stress-project': 'stress-project-details.html',
+                'weather-project': 'weather-project-details.html',
+                'home-project': 'home-project-details.html'
+            };
+            
+            const pageUrl = projectPages[projectId];
+            if (pageUrl) {
+                window.open(pageUrl, '_blank');
+            }
+        }
+
+        // Profile Picture Hover Effect + Drive fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            const profilePicture = document.getElementById('profile-picture');
+            const profileContainer = profilePicture.parentElement.parentElement;
+
+            // Fallback chain for Google Drive hosted image
+            const driveFileId = '1NtLuLPx3_VJv6IH1Pvgjhz73X-_WGFh4';
+            const sources = [
+                `https://lh3.googleusercontent.com/d/${driveFileId}=w800-h800-n-rw`,
+                `https://drive.google.com/uc?export=view&id=${driveFileId}`,
+                `https://drive.google.com/uc?export=download&id=${driveFileId}`,
+                `https://drive.google.com/thumbnail?id=${driveFileId}&sz=w1000`
+            ];
+            let i = 0;
+            const tryNext = () => {
+                if (i < sources.length) {
+                    profilePicture.src = sources[i++];
+                }
+            };
+            profilePicture.addEventListener('error', tryNext);
+            // Start from first source to normalize behavior across devices
+            tryNext();
+
+            // Add hover effect
+            profileContainer.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            profileContainer.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
