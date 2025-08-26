@@ -589,7 +589,11 @@
             }
             
             .nav-links {
-                display: none;
+                display: flex;
+                gap: 15px;
+                background: rgba(255,255,255,0.95);
+                padding: 10px 14px;
+                border-radius: 12px;
             }
 
             .hero-buttons {
@@ -645,7 +649,7 @@
                             <div style="width: 100%; height: 100%; border-radius: 50%; background: var(--dark-bg); display: flex; align-items: center; justify-content: center; overflow: hidden;">
                                 <img id="profile-picture" src="https://drive.google.com/uc?export=view&id=1NtLuLPx3_VJv6IH1Pvgjhz73X-_WGFh4" referrerpolicy="no-referrer" crossorigin="anonymous"
                                      alt="Mahek Sultana" 
-                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; cursor: pointer;">
                             </div>
                         </div>
                     </div>
@@ -690,19 +694,19 @@
                 <div class="card" style="text-align: center;">
                     <i class="fas fa-user" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 20px;"></i>
                     <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Who I Am</h3>
-                    <p style="color: var(--text-secondary);">A dedicated Full Stack Developer passionate about creating innovative digital solutions and bringing ideas to life through code.</p>
+                    <p style="color: var(--text-secondary);">I am a passionate, results-driven, and adaptive Full-Stack Developer with a solid grounding in modern web technologies. I thrive on transforming ideas into functional, scalable digital experiences and take pride in writing clean, maintainable code that balances functionality with user appeal.</p>
                 </div>
                 
                 <div class="card" style="text-align: center;">
                     <i class="fas fa-code" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 20px;"></i>
                     <h3 style="font-size: 1.5rem; margin-bottom: 15px;">My Journey</h3>
-                    <p style="color: var(--text-secondary);">From frontend to backend, I've mastered the complete development stack to deliver seamless user experiences.</p>
+                    <p style="color: var(--text-secondary);">My journey in technology started with curiosity—exploring how things work behind the scenes. Over the years, I have honed my skills through academic projects, internships, and personal initiatives such as developing applications and working across diverse domains, from machine learning and IoT to data processing. Each step has strengthened my technical expertise and my ability to collaborate, think critically, and deliver results.</p>
                 </div>
                 
                 <div class="card" style="text-align: center;">
                     <i class="fas fa-rocket" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 20px;"></i>
                     <h3 style="font-size: 1.5rem; margin-bottom: 15px;">What I Do</h3>
-                    <p style="color: var(--text-secondary);">Building scalable applications with modern technologies, focusing on performance, security, and user experience.</p>
+                    <p style="color: var(--text-secondary);">I specialize in designing, developing, and optimizing efficient, user-focused web applications. My core expertise includes software development with Java, database management with SQL, and deploying solutions in cloud environments. I aim to contribute to innovative projects where technology drives measurable impact and growth.</p>
                 </div>
             </div>
 
@@ -1226,7 +1230,7 @@
             }
         }
 
-        // Profile Picture Hover Effect + Drive fallback
+        // Profile Picture Hover Effect + Drive fallback + Fullscreen viewer
         document.addEventListener('DOMContentLoaded', function() {
             const profilePicture = document.getElementById('profile-picture');
             const profileContainer = profilePicture.parentElement.parentElement;
@@ -1258,6 +1262,16 @@
             profileContainer.addEventListener('mouseleave', function() {
                 this.style.transform = 'scale(1)';
             });
+
+            // Simple fullscreen modal to view profile image on click
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:2000;';
+            const img = document.createElement('img');
+            img.style.cssText = 'max-width:92%;max-height:92%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)';
+            modal.appendChild(img);
+            modal.addEventListener('click', ()=> modal.style.display='none');
+            document.body.appendChild(modal);
+            profilePicture.addEventListener('click', ()=> { img.src = profilePicture.src; modal.style.display='flex'; });
         });
     </script>
 </body>

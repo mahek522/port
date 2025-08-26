@@ -232,6 +232,10 @@
             height: 450px;
             border: none;
         }
+        /* Lightweight placeholder for faster initial load */
+        .video-placeholder{position:relative;width:100%;padding-bottom:56.25%;background:#000;border:none;cursor:pointer}
+        .video-placeholder img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.7)}
+        .video-placeholder .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:64px}
 
         ul {
             margin-left: 20px;
@@ -556,15 +560,9 @@
                 </div>
                 
                 <div class="video-container">
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                        <iframe 
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                            src="https://drive.google.com/file/d/1MW_FkvsZaZ6hsmgqZCE26Ii1tUrHOnyP/preview" 
-                            title="Simple Clap Control Home Automation Demo"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
+                    <div id="home-video" class="video-placeholder">
+                        <img src="https://i.ytimg.com/vi_webp/1MW_FkvsZaZ6/maxresdefault.webp" alt="Video thumbnail" onerror="this.src='https://via.placeholder.com/1280x720?text=Video'">
+                        <div class="play"><i class="fas fa-play-circle"></i></div>
                     </div>
                 </div>
                 
@@ -597,4 +595,23 @@
         </div>
     </div>
 </body>
+<script>
+// Defer heavy Google Drive iframe until user taps/clicks for instant page load
+document.addEventListener('DOMContentLoaded', function(){
+  const ph = document.getElementById('home-video');
+  if(!ph) return;
+  ph.addEventListener('click', function(){
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText='position:relative;padding-bottom:56.25%;height:0;overflow:hidden;';
+    const iframe = document.createElement('iframe');
+    iframe.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+    iframe.src='https://drive.google.com/file/d/1MW_FkvsZaZ6hsmgqZCE26Ii1tUrHOnyP/preview';
+    iframe.title='Simple Clap Control Home Automation Demo';
+    iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.setAttribute('allowfullscreen','');
+    ph.replaceWith(wrapper);
+    wrapper.appendChild(iframe);
+  }, { once:true });
+});
+</script>
 </html>
