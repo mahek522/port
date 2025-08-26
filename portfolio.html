@@ -273,6 +273,7 @@
             background: var(--dark-bg);
             position: relative;
             overflow: hidden;
+            padding-top: 100px; /* prevent header overlap */
         }
 
         .hero::before {
@@ -595,6 +596,8 @@
                 padding: 10px 14px;
                 border-radius: 12px;
             }
+
+            .hero { padding-top: 120px; }
 
             .hero-buttons {
                 flex-direction: column;
